@@ -72,12 +72,23 @@ export default class Library {
   }
   /* výpis všech nepřečtených knih */
   listUnreadBooks() {
-    let unreadBooksLst = [];
+    let unreadBooksList = [];
 
-    unreadBooksLst = this.bookList.filter(book => {
+    unreadBooksList = this.bookList.filter(book => {
       if (!book.isRead) { return true }
     })
-    console.table(unreadBooksLst);
+    console.table(unreadBooksList);
+    this.renderBookList(this.bookList);
+  }
+
+  renderBookList(bookList) {
+    let html = bookList.reduce((accumulator, currentBook) => accumulator + currentBook.renderHTML(this), "");
+    console.log(html);
+    let div = document.createElement('div');
+    div.innerHTML = html
+
+    document.getElementById('booklist').appendChild(div);
+
   }
 
 }
