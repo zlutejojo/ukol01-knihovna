@@ -13,6 +13,7 @@
   - listAllBooks(): výpis všech knih v knihovně
   - startReadingNextBook(): začne čtení další knihy (tj. příští knihu přesune do aktuálně čtené knihy a do příští knihy vloží první nepřečtenou knihu v seznamu)
 */
+
 export default class Library {
 
   constructor() {
@@ -22,6 +23,7 @@ export default class Library {
     this.nextBook = null;
     this.unreadBooks = 0;
   }
+
 
   /* přidat knihu do knihovny */
   addBook(book) {
@@ -58,6 +60,24 @@ export default class Library {
         }
       }
     }
+  }
+  /* dočíst současnou knihu */
+  finishCurrentBook() {
+    if (this.currentBook !== null) {
+      this.currentBook.read();
+      this.lastBook = this.currentBook;
+      this.currentBook = null;
+      this.unreadBooks--;
+    }
+  }
+  /* výpis všech nepřečtených knih */
+  listUnreadBooks() {
+    let unreadBooksLst = [];
+
+    unreadBooksLst = this.bookList.filter(book => {
+      if (!book.isRead) { return true }
+    })
+    console.table(unreadBooksLst);
   }
 
 }

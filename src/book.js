@@ -21,6 +21,8 @@ export default class Book {
     this.isRead = false;
   }
 
+  
+
   read() {
     this.isRead = true;
     console.log(`Super, přečetl jsi knihu ${this.title}.`);
